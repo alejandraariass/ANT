@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /*  Fondo Principal: #959595 (Gris)
+            Fondo Header/Footer: #170000 (Negro Rojizo)
+            Acento Principal: #a97682 (Tonos Rosados/Vinotinto)
+            Texto: #C0C0C0 (Plata) / #000000 (Negro)
+        */
+
+        /* 🌑 Estilos Generales */
+        body {
+            background-color: #959595; /* Gris */
+            color: #170000; /* Texto principal oscuro */
+            font-family: 'Times New Roman', Times, serif; 
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3 {
+            font-family: Georgia, 'Times New Roman', Times, serif; 
+            color: #C0C0C0; /* Títulos en Plata */
+            text-transform: uppercase;
+        }
+
+        a {
+            color: #170000; /* Enlaces en el cuerpo */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffffff; /* Acento en hover */
+        }
+
+        /* --- 🖤 Header y Logo (ANT) --- */
+        .header {
+            background-color: #170000; /* Fondo negro rojizo */
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ffffff; /* Borde blanco */
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column; 
+            align-items: flex-start; 
+            position: relative;
+        }
+        
+        .logo-title-line {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 0;
+            letter-spacing: 3px;
+        }
+        
+        .site-tagline {
+            font-size: 0.8em;
+            color: #C0C0C0; /* Plata */
+            margin-top: 5px; 
+            font-style: italic;
+            text-transform: none; 
+        }
+
+        .verification-badge {
+            width: 35px; 
+            height: 35px;
+            margin-left: 10px; 
+            filter: drop-shadow(0 0 5px rgba(192, 192, 192, 0.5));
+        }
+
+        /* 🌹 Navegación y Botones (Bordes Redondeados) */
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-button {
+            background-color: transparent;
+            color: #C0C0C0;
+            border: 1px solid #C0C0C0;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px; /* Bordes Redondeados */
+        }
+
+        .nav-button:hover {
+            background-color: #a97682; 
+            color: white; 
+            border-color: #ffffff; /* Borde blanco en hover */
+            box-shadow: 0 0 8px #a97682;
+        }
+
+        /* --- 🔪 Menú Desplegable --- */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .menu-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px; 
+        }
+
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 20px;
+            height: 15px;
+        }
+
+        .line {
+            width: 100%;
+            height: 2px;
+            background-color: #C0C0C0; 
+        }
+
+        .menu-toggle:hover .line {
+            background-color: white; 
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #170000; /* Fondo menú desplegable oscuro */
+            min-width: 200px;
+            z-index: 10;
+            top: 100%; 
+            right: 0;
+            border: 1px solid #ffffff;
+        }
+
+        .dropdown-content.show {
+            display: block; 
+        }
+
+        .dropdown-content a {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px dashed #ffffff; 
+            display: block; 
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+
+        /* --- 🥀 Contenido Principal --- */
+        .content-section {
+            flex-grow: 1; 
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .content-section h2 {
+            color: #170000; /* Títulos de sección en el color oscuro del header */
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #C0C0C0;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        
+        /* --- 🔪 Estilos para la Cuadrícula de Contenido (Música/Consejos) --- */
+        .music-grid, .advice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            text-align: left;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Tarjetas para Consejos */
+        .advice-card {
+            background-color: #ffffff; /* Fondo Blanco */
+            border: 1px solid #000000; /* Borde Negro */
+            color: #000000; /* Texto Negro */
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .advice-card:hover {
+            transform: translateY(-5px);
+            border-color: #a97682; 
+            box-shadow: 0 6px 15px rgba(169, 118, 130, 0.4); 
+        }
+
+        .advice-card h3 {
+            color: #000000; /* Título en Vinotinto Oscuro */
+            font-size: 1.2em;
+            margin-top: 0;
+            border-bottom: 1px dashed #333333;
+            padding-bottom: 5px;
+        }
+        
+        /* Tarjetas de Álbumes */
+        .album-card {
+            background-color: #ffffff; /* Fondo Blanco */
+            border: 2px solid #a97682; /* Borde Acento */
+            color: #000000; /* Texto Negro */
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(169, 118, 130, 0.5);
+            transition: background-color 0.4s ease, transform 0.3s ease;
+        }
+        
+        .album-card:hover {
+            background-color: #f7e9ed; /* Fondo claro en hover */
+            transform: scale(1.05);
+        }
+
+        .album-card h3 {
+            color: #000000; /* Título Negro */
+            margin-bottom: 5px;
+        }
+
+        .album-card .artist {
+            color: #a97682; /* Artista Acento */
+            font-style: italic;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .play-button {
+            display: inline-block;
+            background-color: #170000; /* Botón oscuro */
+            color: white;
+            padding: 8px 20px;
+            border: 1px solid white;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 0;
+        }
+
+        .play-button:hover {
+            background-color: #a97682;
+            color: white;
+            box-shadow: 0 0 10px #170000; 
+        }
+
+
+        /* --- 📱 Sección de Contacto y Footer --- */
+        #contacto-section {
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .contact-icons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .social-icon {
+            width: 40px; 
+            height: 40px;
+            filter: grayscale(100%) brightness(1.5); 
+            transition: filter 0.3s ease;
+        }
+
+        .social-icon:hover {
+            filter: none; 
+            box-shadow: 0 0 10px #170000;
+            border-radius: 5px;
+        }
+
+        .footer {
+            background-color: #170000; /* Fondo oscuro */
+            padding: 15px 40px;
+            text-align: center;
+            border-top: 1px solid #a97682;
+            font-size: 0.8em;
+            color: #777777;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo-title-line"> 
+                <h1 class="logo-text">ANT</h1> 
+                <img src="comprobacion-de-insignias.png" alt="Insignia de Verificación" class="verification-badge">
+            </div>
+            <span class="site-tagline">Asociación Nacional de Traumados (rehabilitados)</span>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="#storytimes-section" class="nav-button">StoryTime</a>
+            <a href="#outfit-ideas-section" class="nav-button">Look Inspo</a>
+            <a href="#consejos-section" class="nav-button">Consejitos</a>
+            <a href="#musica-section" class="nav-button">Recomendaciones Musicales</a>
+            
+            <div class="dropdown">
+                <button class="nav-button menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="dropdown-content">
+                    Menú 
+                    <span class="hamburger-icon">
+                        <span class="line"></span>
+                        <span class="line"></span>
+                        <span class="line"></span>
+                    </span>
+                </button>
+                
+                <div class="dropdown-content" id="dropdownContent">
+                    <a href="#info-section">Información</a>
+                    <a href="#contacto-section">Contacto</a>
+                    <a href="https://ngl.link/caoticxzs">Mensajes Anónimos</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="content-section">
+        
+        <section id="storytimes-section">
+            <h2>StoryTime</h2>
+            <p style="color: #170000;">Mi gente, no funcionó, pero sirve de storytime.</p>
+            <div class="music-grid">
+                <div class="album-card">
+                    <h3>Me tiraron una mandarina a la cabeza</h3>
+                    <p style="color: #000000;">Por alguna razón, se le dio la gana de tirarme una mandarina a la cabeza.</p>
+                    <a href="virtualitostorytime.html" class="play-button">Leer Historia</a>
+                </div>
+                <div class="album-card">
+                    <h3>Me fui a chia para conocer al chico con el que hablaba</h3>
+                    <p style="color: #000000;">Linda experiencia, la recomiendo.</p>
+                    <a href="chiastorytime.html" class="play-button">Leer Historia</a>
+                </div>
+                <div class="album-card">
+                    <h3>Me semi-independice 1 mes</h3>
+                    <p style="color: #000000;">No me independice por completo, pero de buena, no se independicen, sale muy caro.</p>
+                    <a href="independenciastorytime.html" class="play-button">Leer Historia</a>
+                </div>
+            </div>
+        </section>
+        
+        <hr>
+
+        <section id="look-inspo-section">
+            <h2>Look Inspo</h2>
+            <p style="color: #170000;">Aprende a vestirte perra, o por lo menos intentalo.</p>
+            <div class="music-grid">
+                <div class="album-card">
+                    <h3>Elegant Streetwear</h3>
+                    <p class="artist" style="color: #000000;">Brunch con amigos, exposiciones de arte, desfiles de moda.</p>
+                    <a href="elegantstreetwearoufit.html" class="play-button">Ver Look</a>
+                </div>
+                <div class="album-card">
+                    <h3>Streetwear Oversize</h3>
+                    <p class="artist" style="color: #000000;">Ir al cine, salir a tomar un café, pasar tiempo al aire libre, estudiar.</p>
+                    <a href="streetwearoversizeoufit.html" class="play-button">Ver Look</a>
+                </div>
+                <div class="album-card">
+                    <h3>Y2K Revival</h3>
+                    <p class="artist" style="color: #000000;">Bares, discotecas, fiestas o cenas con ambiente.</p>
+                    <a href="y2krevivaloufit.html" class="play-button">Ver Look</a>
+                </div>
+            </div>
+        </section>
+        
+        <hr>
+        
+        <section id="consejos-section">
+            <h2>Consejitos</h2>
+            <p style="color: #170000;">Autorregulate, antes de que te internen.</p>
+            <div class="advice-grid">
+                <div class="advice-card">
+                    <h3>Salir a museos tranquiliza</h3>
+                    <p style="color: #000000;">Si sientes que el mundo se te viene encima, ir a museos con amigos (o solx) te ayudara bastante para relajarte.</p>
+                     <a href="consejitos.html" class="play-button">Leer Más</a>
+                </div>
+                <div class="advice-card">
+                    <h3>Entre mejor te veas, mejor te sentirás</h3>
+                    <p style="color: #000000;">Suena cliché, pero cuando te arreglas, te sientes mejor contigo mismx, eleva mucho tu autoestima.</p>
+                     <a href="consejitos.html" class="play-button">Leer Más</a>
+                </div>
+                <div class="advice-card">
+                    <h3>Escribe tus emociones</h3>
+                    <p style="color: #000000;">La mejor forma de comprender lo que sientes, es dandole forma en papel. Ya sea con palabras sueltas, cartas para ti mismx, o incluso una canción, escribir es liberador.</p>
+                     <a href="consejitos.html" class="play-button">Leer Más</a>
+                </div>
+            </div>
+        </section>
+        
+        <hr>
+
+        <section id="musica-section">
+            <h2>Recomendaciones Musicales</h2>
+            <p style="color: #170000;">Lo más importante para sentirte estable, una buena playlist.</p>
+            <div class="music-grid">
+                <div class="album-card">
+                    <h3>My Dear Melancholy,</h3>
+                    <p class="artist" style="color: #000000;">The Weeknd</p>
+                    <a href="https://open.spotify.com/intl-es/album/4qZBW3f2Q8y0k1A84d4iAO?si=kxQU2fgVQI2CktfJoAEvcA" class="play-button">Escuchar</a>
+                </div>
+                <div class="album-card">
+                    <h3>Nostalgia</h3>
+                    <p class="artist" style="color: #000000;">Chase Atlantic</p>
+                    <a href="https://open.spotify.com/intl-es/album/4hZ8kmFKSmguXiWpGjUzcF?si=A9dIlKAST9Ogys6cELYZ6A" class="play-button">Escuchar</a>
+                </div>
+                <div class="album-card">
+                    <h3>(((((ultraSOUND)))))</h3>
+                    <p class="artist" style="color: #000000;">The Neighbourhood</p>
+                    <a href="https://open.spotify.com/intl-es/album/1xsGQbqvVDIq3sCJDUzQZv?si=Zxrlanv8TSWsOfAgF1i4KQ" class="play-button">Escuchar</a>
+                </div>
+            </div>
+        </section>
+        
+        <hr>
+
+        <section id="contacto-section">
+            <h2>Contacto</h2>
+            <p style="color: #170000;">¡Puedes contactarme a través de mis redes sociales!</p>
+            <div class="contact-icons">
+                <a href="https://www.instagram.com/blytheloow/?next=%2F" target="_blank"><img src="instagram.png" alt="Instagram" class="social-icon"></a>
+                <a href="https://www.facebook.com/prnxpthx/" target="_blank"><img src="facebook.png" alt="Facebook" class="social-icon"></a>
+                <a href="https://wa.me/qr/LHD5UX4YP4JNB1" target="_blank"><img src="whatsapp.png" alt="WhatsApp" class="social-icon"></a>
+                <a href="https://www.tiktok.com/@blytheloow?_r=1&_t=ZS-921xHtyR4DN" target="_blank"><img src="tik-tok.png" alt="TikTok" class="social-icon"></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© Las malas vibras no van con mi oufit</p>
+        <p>Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const content = document.getElementById('dropdownContent');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true' || false;
+            
+            this.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('show');
+        });
+    </script>
+
+</body>
+</html>
+
